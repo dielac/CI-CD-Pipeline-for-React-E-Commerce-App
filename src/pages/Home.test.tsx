@@ -1,26 +1,46 @@
-// src/pages/Home.test.tsx
-
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import Home from "./Home";
+import { ProductProvider } from "../context/ProductContext";
+import { CartProvider } from "../context/CartContext";
 
-//
-// Home.test.tsx
-// Ensures the Home page shows its heading and a description paragraph.
-// Again, we use RTL’s render() and screen.getBy… methods.
-//
+jest.mock("@tanstack/react-query", () => ({
+  useQuery: ({ queryKey }: any) => {
+    if (queryKey[0] === "products") {
+      return {
+        data: [
+          {
+            id: 1,
+            title: "Test Product",
+            price: 50,
+            category: "shoes",
+            image: "https://via.placeholder.com/150", 
+          },
+        ],
+        isLoading: false,
+        isError: false,
+      };
+    } else if (queryKey[0] === "categories") {
+      return {
+        data: ["shoes", "hats"],
+        isLoading: false,
+        isError: false,
+      };
+    }
+    return { data: null, isLoading: false, isError: false };
+  },
+}));
 
-test("Home renders heading and description", () => {
-  // Render the <Home /> component
-  render(<Home />);
+describe("Home Page", () => {
+  test("renders mocked product", () => {
+    render(
+      <ProductProvider>
+        <CartProvider>
+          <Home />
+        </CartProvider>
+      </ProductProvider>
+    );
 
-  // Grab the <h1> element (role="heading", level 1) and check its content
-  const headingElement = screen.getByRole("heading", { level: 1 });
-  expect(headingElement).toHaveTextContent("Home Page");
-
-  // Now find the paragraph text that says “This is the home page…”
-  const paragraphElement = screen.getByText(
-    /This is the home page for our e-commerce app\./i
-  );
-  expect(paragraphElement).toBeInTheDocument();
+    expect(screen.getByText(/Test Product/i)).toBeInTheDocument();
+    expect(screen.getByText(/\$50/i)).toBeInTheDocument();
+  });
 });

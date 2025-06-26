@@ -1,12 +1,7 @@
-import React from "react";
 import { useCart } from "../context/CartContext";
 import type { Product } from "../types/types";
 
-//
-// CartPage Component
-// Reads cartItems from CartContext and displays each product’s title.
-// If no items, shows a friendly message.
-//
+
 
 const CartPage = () => {
   const { cartItems } = useCart();

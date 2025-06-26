@@ -8,7 +8,6 @@ import "./Home.css";
 const Home: React.FC = () => {
   const { products, dispatch, selectedCategory } = useProductContext();
 
-  // --- Fetch all products from the API ---
   const {
     data: productsData,
     isLoading: productsLoading,
@@ -18,17 +17,7 @@ const Home: React.FC = () => {
     queryFn: fetchProducts,
   });
 
-  // Whenever the productsData arrives, populate context state
-  useEffect(() => {
-    if (productsData?.data) {
-      dispatch({
-        type: "SET_PRODUCTS",
-        payload: productsData.data,
-      });
-    }
-  }, [productsData, dispatch]);
-
-  // --- Fetch all categories from the API ---
+  // Fetch all categories
   const {
     data: categoriesData,
     isLoading: categoriesLoading,
@@ -38,27 +27,37 @@ const Home: React.FC = () => {
     queryFn: fetchCategories,
   });
 
-  // Helper to filter products based on the selectedCategory
+  useEffect(() => {
+    if (productsData?.data) {
+      dispatch({
+        type: "SET_PRODUCTS",
+        payload: productsData.data,
+      });
+    }
+  }, [productsData, dispatch]);
+
   const getFilteredProducts = () => {
     if (selectedCategory) {
-      return products.filter((p) => p.category === selectedCategory);
+      return products.filter(
+        (p) => p.category === selectedCategory
+      );
     }
     return products;
   };
 
   const filteredProducts = getFilteredProducts();
 
-  // Show a loading or error state if needed
   if (productsLoading || categoriesLoading) {
     return <div className="home-loading">Loading...</div>;
   }
+
   if (productsError || categoriesError) {
     return <div className="home-error">Something went wrong. Please try again.</div>;
   }
 
   return (
     <div className="home-container">
-      {/* ——— Category Dropdown ——— */}
+      {/* Category Dropdown */}
       <label htmlFor="category-select" className="home-label">
         Filter by Category:
       </label>
@@ -66,10 +65,7 @@ const Home: React.FC = () => {
         id="category-select"
         className="home-select"
         onChange={(e) =>
-          dispatch({
-            type: "SET_SELECTED_CATEGORY",
-            payload: e.target.value,
-          })
+          dispatch({ type: "SET_SELECTED_CATEGORY", payload: e.target.value })
         }
         value={selectedCategory}
       >
@@ -81,7 +77,7 @@ const Home: React.FC = () => {
         ))}
       </select>
 
-      {/* ——— Clear Filter Button ——— */}
+      {/* Clear Filter Button */}
       {selectedCategory && (
         <button
           className="home-clear-button"
@@ -93,7 +89,7 @@ const Home: React.FC = () => {
         </button>
       )}
 
-      {/* ——— Product Grid ——— */}
+      {/* Product Grid */}
       <div className="product-grid">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (

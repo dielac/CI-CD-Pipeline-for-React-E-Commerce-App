@@ -1,54 +1,42 @@
-# React + TypeScript + Vite
+# React E-Commerce App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive e-commerce website built using **React**, **TypeScript**, and **Vite**.  
+This project includes product listing, category filtering, cart functionality, and is fully tested with **Jest** and **React Testing Library**.  
+It also features a full **CI/CD pipeline** using GitHub Actions, and is automatically deployed to **Vercel**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Live Demo
 
-## Expanding the ESLint configuration
+ [View the Live Site](when i have vercel link add here )  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##  Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React** + **TypeScript**
+- **Vite** for build tooling
+- **React Context API** for global state
+- **React Query** for API data fetching
+- **Jest** & **React Testing Library** for testing
+- **GitHub Actions** for CI/CD
+- **Vercel** for hosting
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+##  Testing Overview
+
+This project uses **Test-Driven Development (TDD)** principles.
+
+###  Unit Tests
+- `ProductCard.test.tsx`: Verifies product title and price are rendered.
+- `Home.test.tsx`:  Confirms category dropdown and filter rendering.
+
+### Integration Test
+- `Cart.integration.test.tsx`: Simulates adding a product to the cart and verifies the cart UI updates.
+
+Run tests locally with:
+
+```bash
+npm test

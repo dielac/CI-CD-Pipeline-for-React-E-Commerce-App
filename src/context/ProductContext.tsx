@@ -1,8 +1,7 @@
-
-
-import React, {createContext,useContext, useReducer, ReactNode, Dispatch } from "react";
-
+import React, { createContext, useContext, useReducer } from "react";
+import type { ReactNode, Dispatch } from "react";
 import type { Product } from "../types/types";
+
   
   // --- ACTION TYPES ---
   type ProductAction =

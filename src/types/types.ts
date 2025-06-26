@@ -13,4 +13,4 @@ export interface Product {
   }
   
   export type Category = string;
-  
+ 

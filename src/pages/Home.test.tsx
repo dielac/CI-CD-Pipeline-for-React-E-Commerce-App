@@ -1,33 +1,28 @@
-jest.mock("@tanstack/react-query", () => ({
-  useQuery: ({ queryKey }: any) => {
-    if (queryKey[0] === "products") {
-      return {
-        data: {
-          data: [
-            {
-              id: 1,
-              title: "Test Product",
-              price: 50,
-              category: "shoes",
-              image: "https://via.placeholder.com/150",
-              rating: { rate: 4.5, count: 10 },
-              description: "Test product desc",
-            },
-          ],
-        },
-        isLoading: false,
-        isError: false,
-      };
-    }
+import { render, screen } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Home from "./Home";
+import { ProductProvider } from "../context/ProductContext";
+import { CartProvider } from "../context/CartContext";
 
-    if (queryKey[0] === "categories") {
-      return {
-        data: { data: ["shoes", "hats"] },
-        isLoading: false,
-        isError: false,
-      };
-    }
 
-    return { data: null, isLoading: false, isError: false };
-  },
+jest.mock("@smastrom/react-rating", () => ({
+  Rating: () => <div data-testid="mock-rating">★</div>,
 }));
+
+const queryClient = new QueryClient();
+
+describe("Home Page", () => {
+  it("renders without crashing and shows loading state", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ProductProvider>
+          <CartProvider>
+            <Home />
+          </CartProvider>
+        </ProductProvider>
+      </QueryClientProvider>
+    );
+
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  });
+});

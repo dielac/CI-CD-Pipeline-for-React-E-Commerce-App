@@ -14,6 +14,9 @@ const fakeProduct: Product = {
   rating: { rate: 4.2, count: 10 },
 };
 
+jest.mock("@smastrom/react-rating", () => ({
+  Rating: () => <div data-testid="mock-rating" />,
+}));
 test("renders product title and price", () => {
   render(
     <ProductProvider>

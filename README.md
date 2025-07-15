@@ -1,42 +1,45 @@
 # React E-Commerce App
 
-A modern, responsive e-commerce website built using **React**, **TypeScript**, and **Vite**.  
-This project includes product listing, category filtering, cart functionality, and is fully tested with **Jest** and **React Testing Library**.  
-It also features a full **CI/CD pipeline** using GitHub Actions, and is automatically deployed to **Vercel**.
+This is a beginner-friendly e-commerce web application built using React, TypeScript, and Vite.  
+The project includes a shopping cart, product listing, category filtering, and a basic design.  
+It also features a complete CI/CD pipeline with GitHub Actions and automatic deployment to Vercel.
 
 ---
 
-##  Live Demo
+## 🌐 Live Demo
 
- [View the Live Site](when i have vercel link add here )  
-
-
----
-
-##  Tech Stack
-
-- **React** + **TypeScript**
-- **Vite** for build tooling
-- **React Context API** for global state
-- **React Query** for API data fetching
-- **Jest** & **React Testing Library** for testing
-- **GitHub Actions** for CI/CD
-- **Vercel** for hosting
+👉 [View the live site here](https://vercel.com/diela-camajs-projects/ci-cd-pipeline-for-react-e-commerce-app)
 
 ---
 
-##  Testing Overview
+##  Features
 
-This project uses **Test-Driven Development (TDD)** principles.
+- Product listing with categories
+- Filter products by category
+- add items to a shopping cart
+- Unit and integration tests
+- GitHub Actions workflow for CI/CD
+- Automatic deployment to Vercel
 
-###  Unit Tests
-- `ProductCard.test.tsx`: Verifies product title and price are rendered.
-- `Home.test.tsx`:  Confirms category dropdown and filter rendering.
+---
 
-### Integration Test
-- `Cart.integration.test.tsx`: Simulates adding a product to the cart and verifies the cart UI updates.
+##  Technologies Used
 
-Run tests locally with:
+- React
+- TypeScript
+- Vite
+- React Query
+- Jest + React Testing Library
+- GitHub Actions
+- Vercel
 
+---
+
+##  Getting Started
+
+If you want to run this project locally:
+
+###  Clone the repository:
 ```bash
-npm test
+git clone https://github.com/dielac/CI-CD-Pipeline-for-React-E-Commerce-App.git
+cd CI-CD-Pipeline-for-React-E-Commerce-App
